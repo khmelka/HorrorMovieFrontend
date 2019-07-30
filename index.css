@@ -1,0 +1,75 @@
+body {
+    background-image: url("https://wallpaperplay.com/walls/full/8/a/1/141209.jpg");
+}
+
+h1{
+    color:rgb(205, 15, 15);
+    text-align: center;
+    font-family: 'Butcherman', cursive;
+    font-size: 90px;
+    margin: -20px 0 0 0;
+
+}
+
+/* .container {
+    height: 470px;
+    width: 200px;
+} */
+
+.card {
+    position: relative;
+    height: 470px;
+    width: 200px;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+  }
+
+.card:hover {
+    transform: rotateY(180deg);
+}
+
+.front-card{
+    position: absolute;
+    background-color: rgb(205, 15, 15);
+    height: 370px;
+    width: 200px;
+    padding: 10px;
+    border-radius: 10px;
+    backface-visibility: hidden;
+}
+  
+.back-card{
+    position: absolute;
+    height: 370px;
+    width: 200px;
+    /* background-color: rgb(205, 15, 15); */
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+}
+
+#title{
+  color: rgb(75, 17, 17);
+  margin: 0 0 0 0;
+}
+
+#release_year{
+    margin: 10px 0 0 0;
+}
+
+#pic{
+height: 250px;
+width: 200px;
+/* margin: 0 10px 0 20px; */
+}
+
+#sum{
+    /* margin: 12px 0 0 0; */
+    color: rgb(243, 54, 54);
+    font-size: 18px;
+    margin: auto;
+}
+
+#like_button{
+    margin: 10px 0 10px 0;
+}
+
