@@ -7,15 +7,22 @@ function createCard(element){
 
     const body = document.querySelector('body')
 
-    const div = document.createElement('div')
-    body.appendChild(div)
+    const column = document.createElement('div')
+    column.className = 'column'
+    body.appendChild(column)
+
+    const row = document.createElement('div')
+    row.className = 'row'
+    column.appendChild(row)
+
+    
 
     const frontCardDiv = document.createElement('div')
     frontCardDiv.className = 'front-card'
 
     const backCardDiv = document.createElement('div')
     backCardDiv.className = 'back-card'
-    div.append(frontCardDiv, backCardDiv)
+    column.append(frontCardDiv, backCardDiv)
 
 
     //image
@@ -31,15 +38,19 @@ function createCard(element){
     //year
     const year = document.createElement('h5')
     year.setAttribute("id", "release_year")
-    frontCardDiv.append(img, title, year)
     year.innerText = element.release_year
-    div.appendChild(frontCardDiv)
 
     const h6 = document.createElement("h6")
     h6.setAttribute("id", "sum")
     backCardDiv.appendChild(h6)
     h6.innerText = element.sum
-    div.appendChild(backCardDiv)
+
+    const emoji = document.createElement('i')
+    emoji.className = 'em svg-some-emoji'
+
+    frontCardDiv.append(img, title, year, emoji)
+
+
 
     img.addEventListener("click", function(event){
     event.target.parentNode.parentNode.classList.toggle('card')
@@ -55,11 +66,6 @@ console.log(body)
 
 
 
-
-    
-    
-
-    
     
 fetch(movieAPI)
 .then (resp => resp.json())

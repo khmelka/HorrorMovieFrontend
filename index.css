@@ -11,17 +11,16 @@ h1{
 
 }
 
-/* .container {
-    height: 470px;
-    width: 200px;
-} */
 
-.card {
+
+.column {
     position: relative;
     height: 470px;
     width: 200px;
     transition: transform 1s;
     transform-style: preserve-3d;
+    
+    
   }
 
 .card:hover {
@@ -72,3 +71,7 @@ width: 200px;
 #like_button{
     margin: 10px 0 10px 0;
 }
+
+
+
+
