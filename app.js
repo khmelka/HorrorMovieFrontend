@@ -1,3 +1,8 @@
+// import EmojiPicker from "./node_modules/rm-emoji-picker/dist/"
+// import EmojiPicker from ''
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
 
 
@@ -7,22 +12,21 @@ function createCard(element){
 
     const body = document.querySelector('body')
 
-    const column = document.createElement('div')
-    column.className = 'column'
-    body.appendChild(column)
+    const container = document.createElement('div')
+    container.className = 'container'
+    body.appendChild(container)
 
-    const row = document.createElement('div')
-    row.className = 'row'
-    column.appendChild(row)
+    const card = document.createElement('div')
+    card.className = 'card'
+    container.appendChild(card)
 
-    
 
     const frontCardDiv = document.createElement('div')
     frontCardDiv.className = 'front-card'
 
     const backCardDiv = document.createElement('div')
     backCardDiv.className = 'back-card'
-    column.append(frontCardDiv, backCardDiv)
+    card.append(frontCardDiv, backCardDiv)
 
 
     //image
@@ -40,27 +44,35 @@ function createCard(element){
     year.setAttribute("id", "release_year")
     year.innerText = element.release_year
 
+    //sum
     const h6 = document.createElement("h6")
     h6.setAttribute("id", "sum")
     backCardDiv.appendChild(h6)
     h6.innerText = element.sum
 
-    const emoji = document.createElement('i')
-    emoji.className = 'em svg-some-emoji'
 
-    frontCardDiv.append(img, title, year, emoji)
-
-
-
-    img.addEventListener("click", function(event){
-    event.target.parentNode.parentNode.classList.toggle('card')
-        })
-    h6.addEventListener("click", function(event){
-    event.target.parentNode.parentNode.classList.toggle('card') 
-        })
+    //emoji
+    // const emoji = new EmojiPicker(); 
+    // console.log(emoji)
+    // const smily = document.createElement('div')
     
 
-console.log(body)
+
+
+    frontCardDiv.append(img, title, year)
+
+    
+
+    img.addEventListener("click", function(event){
+    event.target.parentNode.parentNode.classList.toggle('rotate')
+    console.log(event)
+
+        })
+    h6.addEventListener("click", function(event){
+    event.target.parentNode.parentNode.classList.remove('rotate') 
+        })
+    
+console.log(container)
 
 }
 
@@ -73,7 +85,7 @@ fetch(movieAPI)
 
 function renderInfo(json){
     json.forEach(element => {
-        console.log(element)
+        // console.log(element)
         createCard(element)
     })
 }  
