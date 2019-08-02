@@ -1,6 +1,31 @@
+
 body {
     background-image: url("https://wallpaperplay.com/walls/full/8/a/1/141209.jpg");
+
 }
+
+
+.menu {
+    width: 120px;
+    border-radius: 3px;
+    overflow: hidden;
+    margin: -50px -10px 30px 10px;
+}
+
+.menu select {
+  background-color: rgba(230, 14, 14, 0.685);
+  color: rgb(8, 1, 1);
+  font-size: inherit;
+  padding: .5em;
+  padding-right: 2.5em; 
+  border: 0;
+  margin: 0;
+  border-radius: 3px;
+  text-indent: 0.01px;
+  text-overflow: '';
+  -webkit-appearance: button; /* hide default arrow in chrome OSX */
+}
+
 
 h1{
     color:rgb(205, 15, 15);
@@ -34,7 +59,7 @@ h1:hover {
     display: inline-flex;
     /* flex-direction: row; */
     /* justify-content: space-around; */
-    margin: 0 20px 0 50px;
+    margin: 40px 20px 0 50px;
    
     justify-content: center;
 

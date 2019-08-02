@@ -1,12 +1,10 @@
 // import EmojiPicker from "./node_modules/rm-emoji-picker/dist/"
 // import EmojiPicker from ''
-
-
-
 document.addEventListener('DOMContentLoaded', () => {
 
 
     movieAPI = "http://localhost:3000/movies"
+
  
 function createCard(element){
 
@@ -61,7 +59,7 @@ function createCard(element){
 
     frontCardDiv.append(img, title, year)
 
-    
+
 
     img.addEventListener("click", function(event){
     event.target.parentNode.parentNode.classList.toggle('rotate')
@@ -90,5 +88,7 @@ function renderInfo(json){
     })
 }  
     
+
+
 })//closing DOM
     
