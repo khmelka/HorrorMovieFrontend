@@ -105,11 +105,10 @@ h1:hover {
 
 #title{
   color: rgb(75, 17, 17);
-  margin: 0 0 0 0;
 }
 
 #release_year{
-    margin: 10px 0 0 0;
+    margin: 10px 0 15px 0;
 }
 
 #pic{
@@ -130,5 +129,7 @@ width: 200px;
 }
 
 
-
+#likes{
+  padding-left: 0.4rem;
+}
 

@@ -1,10 +1,8 @@
-// import EmojiPicker from "./node_modules/rm-emoji-picker/dist/"
-// import EmojiPicker from ''
 document.addEventListener('DOMContentLoaded', () => {
 
 
     movieAPI = "http://localhost:3000/movies"
-
+    likeAPI = "http://localhost:3000/likes"
  
 function createCard(element){
 
@@ -18,6 +16,8 @@ function createCard(element){
     card.className = 'card'
     container.appendChild(card)
 
+    //movie_id
+    // card.dataset.movieId = element.id
 
     const frontCardDiv = document.createElement('div')
     frontCardDiv.className = 'front-card'
@@ -50,14 +50,33 @@ function createCard(element){
 
 
     //emoji
-    // const emoji = new EmojiPicker(); 
-    // console.log(emoji)
-    // const smily = document.createElement('div')
+    const emoji = document.createElement('i')
+    emoji.className = "em em---1"
+
+    const likes = document.createElement('span')
+    likes.setAttribute("id", "likes")
+    likes.innerText = parseInt(`${element.likes.length}`)
+
+    let click = 0
+    emoji.addEventListener("click", function (){
+        const click = parseInt(likes.innerText)
+        clickCounter = parseInt(click+1)
+        likes.innerText = (clickCounter)
     
+        fetch (likeAPI, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({number_of_likes: clickCounter,
+            movie_id: element.id})
+        })
+    })//closing of likes
 
 
-
-    frontCardDiv.append(img, title, year)
+   
+    frontCardDiv.append(img, title, year, emoji, likes)
 
 
 
@@ -88,7 +107,5 @@ function renderInfo(json){
     })
 }  
     
-
-
 })//closing DOM
     
