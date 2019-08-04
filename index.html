@@ -13,31 +13,39 @@
 </head>
 <body>
     <h1>HORROR MOVIES</h1>
-    
-    <body>
-            <div class="container">
-                <div class="card">
+    <div class="dropdown" style="width:200px;">
+            <select id="menu">
+              <option value="0">Sort</option>
+              <option value="1">Most Liked</option>
+              <option value="2">Year-Newest First</option>
+              <option value="3">Year-Oldest First</option>
+              <!-- <option value="4">rating highest to lowest</option> -->
+            </select>
+          </div>
+   
+            <!-- <div class="container">
+                <div>
                     <div class="front-card">
                         <img src="" id="pic" data-id=""/>
                         <h4 id="title">movie title</h4>
                         <h5 id="release_year">year</h5>
                         <button id="like_button">Like</button>
                         <span id="likes">n</span>
-                        <form id="comment_form">
-                        <input id="comment_input" type="text" name="comment" placeholder="Add Comment"/>
-                        <input type="submit" value="Submit"/>
+                        
                         <i class="em em-some-emoji"></i>
-
                         </form>
                         <ul id="comments">
-                            <!-- <li> for each comment goes here -->
+                            
                         </ul>
                     </div>
                     <div class="back-card">
                         <h6 id="sum">sum</h6>
                     </div>
                 </div>
-            </div>
+            </div> -->
+            <!-- <audio autoplay loop>
+                <source src="ghost02.mp3">
+            </audio> -->
         
     <script src="app.js"></script>
 </body>
