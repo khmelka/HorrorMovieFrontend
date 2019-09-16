@@ -42,6 +42,8 @@ function createCard(element){
   year.setAttribute("id", "release_year")
   year.innerText = element.release_year
 
+
+
   //sum
   const h6 = document.createElement("h6")
   h6.setAttribute("id", "sum")
@@ -107,21 +109,23 @@ function renderInfo(json){
 
   })
 
+  
 
 //selecting from dropdown menu
-function getSelected(){
+
   const menu = document.getElementById('menu')
-  console.log(menu)
+
+  function yearCount(a, b) {
+    return a.release_year - b.release_year
+  }
+
+
   menu.addEventListener("change", function(){
     if (menu.value == 1){
-      json.sort((a, b) => {
-        const i = a.release_year - b.release_year
-        console.log(i)
-      })
-
-
-
+      console.log(json.sort(yearCount))
     }
+
+    
     else if (menu.value == 2){
         console.log("2")
 
@@ -130,17 +134,10 @@ function getSelected(){
     else if (menu.value == 3){
       console.log("3")
 
-
-  }
-
-
-
-
-    
+    }
   })//closing eventListener
-}
 
-getSelected()
+
 
 
   
@@ -150,4 +147,3 @@ getSelected()
 
 
   
-

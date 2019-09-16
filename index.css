@@ -59,8 +59,8 @@ h1:hover {
     /* flex-direction: row; */
     /* justify-content: space-around; */
     margin: 40px 20px 0 50px;
-   
-    justify-content: center;
+   position: relative;
+
 
   }
 
@@ -70,8 +70,7 @@ h1:hover {
     width: 200px;
     transition: transform 1s;
     transform-style: preserve-3d;
-    flex-grow: 5;
-    
+    flex-grow: 5;    
   }
 
   .rotate{
@@ -85,7 +84,7 @@ h1:hover {
 .front-card{
     position: absolute;
     background-color: rgb(205, 15, 15);
-    height: 370px;
+    height: 360px;
     width: 200px;
     padding: 10px;
     border-radius: 10px;
@@ -102,12 +101,13 @@ h1:hover {
     transform: rotateY(180deg);
 }
 
-#title{
-  color: rgb(75, 17, 17);
+#movie_title{
+  color: rgb(0, 0, 0);
+  margin: 10px 0 0 0;
 }
 
 #release_year{
-    margin: 10px 0 15px 0;
+    margin: 20px 0 29px 0;
 }
 
 #pic{
@@ -123,12 +123,14 @@ width: 200px;
     margin: auto;
 }
 
-#like_button{
-    margin: 10px 0 10px 0;
+.em.em---1{
+    margin: -10px 0 10px 0;
 }
 
 
 #likes{
-  padding-left: 0.4rem;
+position: relative;
+bottom: 5px;
+padding-left: 0.4rem;
 }
 
