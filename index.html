@@ -9,19 +9,56 @@
     <link href="https://fonts.googleapis.com/css?family=Butcherman&display=swap" rel="stylesheet">
     <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 
-
 </head>
 <body>
-    <h1>HORROR MOVIES</h1>
-    <div class="dropdown" style="width:200px;">
+    <h1 class="title">HORROR MOVIES</h1>
+
+    <ul>
+        <li class="dropdown">
+          <a href="javascript:void(0)" class="dropbtn">Sort</a>
+          <div class="dropdown-content">
+            <a id="liked" href="#">Most Liked</a>
+            <a id="newest" href="#">Year-Newest</a>
+            <a id="oldest" href="#">Year-Oldest</a>
+          </div>
+          <li><a id="newcard" href="#home">Add New Card</a></li>
+
+        </li>
+        <!-- <div>
+            <audio controls autoplay="controls" id="audio">
+              <source src="ghost02.mp3">
+          </audio>
+           </div> -->
+      </ul>
+      
+
+      <div class="formMainContainer">
+         <div class="formContainer">
+                <form action="">
+                   
+                    <input type="text" name="title">
+                    <button id="button" type="button" value="Add">Add Movie</button>
+                     </form>
+         </div>
+
+      </div>
+    
+    <!-- <div class="dropdownMenu" style="width:200px;">
+        
             <select id="menu">
               <option value="0">Sort</option>
               <option value="1">Most Liked</option>
               <option value="2">Year-Newest First</option>
-              <option value="3">Year-Oldest First</option>
+              <option value="3">Year-Oldest First</option> -->
               <!-- <option value="4">rating highest to lowest</option> -->
-            </select>
-          </div>
+              
+            <!-- </select> -->
+            <!-- <div>
+            <audio controls="controls">
+                <source src="ghost02.mp3">
+            </audio>
+        </div> -->
+          <!-- </div> -->
    
             <!-- <div class="container">
                 <div>
@@ -43,9 +80,7 @@
                     </div>
                 </div>
             </div> -->
-            <!-- <audio autoplay loop>
-                <source src="ghost02.mp3">
-            </audio> -->
+           
         
     <script src="app.js"></script>
 </body>
