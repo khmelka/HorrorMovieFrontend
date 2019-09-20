@@ -35,9 +35,9 @@ function createCard(element){
 
 
   //image
-  const img = document.createElement('img')
-  img.setAttribute("id", "pic")
-  img.src = element.image 
+  const image = document.createElement('img')
+  image.setAttribute("id", "pic")
+  image.src = element.image 
 
   //title
   const title = document.createElement('h5')
@@ -84,10 +84,10 @@ function createCard(element){
 
 
  
-  frontCardDiv.append(img, title, year, emoji, likes)
+  frontCardDiv.append(image, title, year, emoji, likes)
 
 
-  img.addEventListener("click", function(event){
+  image.addEventListener("click", function(event){
   event.target.parentNode.parentNode.classList.toggle('rotate')
 
       })
@@ -176,14 +176,35 @@ function renderInfo(json){
 
   document.querySelector(".formMainContainer").style.display = "none"
 
+  //add new card option on navbar
   newcard.addEventListener("click", function(){
     document.querySelector(".formMainContainer").style.display = "block"
     // createCard()
   })
 
+
   document.getElementById("button").addEventListener("click", function(){
     console.log("yes")
+    // preventDefault()
+
+    
     createCard()
+
+    fetch (movieAPI, {
+      method: 'POST',
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(
+        {image: image.src,
+         title: title.innerText,
+         release_year: year,
+         sum: sum
+        })
+      })
+    
+    
   })
 
 
