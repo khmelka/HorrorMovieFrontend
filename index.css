@@ -4,8 +4,9 @@ body {
     background-image: url("https://wallpaperplay.com/walls/full/8/a/1/141209.jpg");
     display: contents;
     min-height: 100vh;
-    overflow: hidden;
-    /* background-size: 100% 100%; */
+    /* overflow: hidden; */
+    background-attachment: fixed;
+    background-size: 100% 100%;
 }
 
 
