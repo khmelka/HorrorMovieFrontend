@@ -104,11 +104,14 @@ const state = {
   edit: null
 }
 
-const getMovies = () => {
-  return fetch(movieAPI)
+
+
+function getMovies(){
+  fetch(movieAPI)
       .then (resp => resp.json())
       .then (movie_array => {
         state.movies = movie_array
+        console.log("movie api", movieAPI)
         console.log("getall", movie_array)
         renderInfo(movie_array)
  })
@@ -116,7 +119,7 @@ const getMovies = () => {
 
 
 function renderInfo(){
-  mainContainer.innerHTML=""
+  // mainContainer.innerHTML=""
   state.movies.forEach(movie => {
       // console.log("renderInfo",movie)
       createCard(movie)
@@ -180,54 +183,60 @@ function deleteChild() {
   })
 
 
-  
+  const form = document.getElementById('form')
 
-  document.querySelector('#form').addEventListener("submit", function(e){
+  form.addEventListener("submit", function(e){
     console.log("yes")
     e.preventDefault()
 
-   const image = document.querySelector("#image").value
-   const title = document.querySelector("#title").value
-   const release_year = document.querySelector("#release_year").value
-   const sum = document.querySelector("#sum").value
+   const formData = new FormData (form)
 
-   const formData = {image, title, release_year, sum}
-  //  let title2 = document.getElementById("movie_title")
-  //  title2.innerText = title
-   createMovie(formData)
-   console.log("new", formData)
+   const mimage = formData.get('image')
+   console.log("mimage",mimage);
+   const mtitle = formData.get('title')
+   const myear = formData.get('release_year')
+   const msum = formData.get('sum')
 
-   
-  })
+   mimage.src = image,
+   mtitle.innerText = title
+   myear.innerText= release_year
+   msum.innerText = sum
+   console.log("image", mimage, mtitle, myear, msum)
+  
 
+    // let img = document.getElementById('pic')
+    img.src = image.value
+    console.log(img.src, "fff")
 
-    const createMovie = (formData) => {
-      return fetch(movieAPI, {
+    // const fcard = document.createElement('front-card')
+    // fcard.appendChild(img)
+    // form.appendChild(fcard)
+
+   const bcard = document.getElementsByClassName('back-card')
+    
+    
+    
+    
+    fetch(movieAPI, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData)
-      }).then (resp => getMovies())
-      
-      }
-      
-    
-      
-    
+        body: JSON.stringify({
+          image: img.src,
+          title: mtitle.innerText,
+          release_year: myear.innerText,
+          sum: sum.innerText
+        })
+      })
 
-    // fetch (movieAPI, {
-    //   method: 'POST',
-    //   headers: {
-    //       'Accept': 'application/json',
-    //       'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({
-    //         newmovie
-    //   })
-    //  })
+
+      .then(resp => resp.json())
+        .then(data=>console.log("hhhhh", data))
+     
   
+  })
 
   
 
