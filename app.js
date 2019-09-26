@@ -1,19 +1,18 @@
+
 document.addEventListener('DOMContentLoaded', () => {
 
+  
+  
+  const movieAPI = `http://localhost:3000/movies`
+  const likeAPI = `http://localhost:3000/likes`
 
-  const movieAPI = "http://localhost:3000/movies"
-  const likeAPI = "http://localhost:3000/likes"
+
+  const mainContainer=document.querySelector(".mainContainer")
 
 
-  const body = document.querySelector('body')
 
-  const mainContainer = document.createElement('div')
-  mainContainer.className='mainContainer'
-  body.appendChild(mainContainer)
 
-function createCard(element){
-
-  // const body = document.querySelector('body')
+  function createCard(movie){
 
   const container = document.createElement('div')
   container.className = 'container'
@@ -37,17 +36,17 @@ function createCard(element){
   //image
   const image = document.createElement('img')
   image.setAttribute("id", "pic")
-  image.src = element.image 
+  image.src = movie.image
 
   //title
   const title = document.createElement('h5')
   title.setAttribute("id", "movie_title")
-  title.innerText = element.title
+  title.innerText = movie.title
 
   //year
   const year = document.createElement('h5')
   year.setAttribute("id", "release_year")
-  year.innerText = element.release_year
+  year.innerText = movie.release_year
 
 
 
@@ -55,7 +54,7 @@ function createCard(element){
   const h6 = document.createElement("h6")
   h6.setAttribute("id", "sum")
   backCardDiv.appendChild(h6)
-  h6.innerText = element.sum
+  h6.innerText = movie.sum
 
 
   //emoji
@@ -64,7 +63,7 @@ function createCard(element){
 
   const likes = document.createElement('span')
   likes.setAttribute("id", "likes")
-  likes.innerText = parseInt(`${element.likes.length}`)
+  likes.innerText = parseInt(`${movie.likes.length}`)
 
   
   emoji.addEventListener("click", function (){
@@ -78,7 +77,7 @@ function createCard(element){
           'Content-Type': 'application/json'
       },
       body: JSON.stringify({number_of_likes: likes.innerText,
-          movie_id: element.id})
+          movie_id: movie.id})
       })
   })//closing of likes
 
@@ -97,18 +96,36 @@ function createCard(element){
      
 
 
+}//closing CreateCard()
+
+
+const state = {
+  movies: [],
+  edit: null
 }
 
 
 
+function getMovies(){
+  fetch(movieAPI)
+      .then (resp => resp.json())
+      .then (movie_array => {
+        state.movies = movie_array
+        console.log("movie api", movieAPI)
+        console.log("getall", movie_array)
+        renderInfo(movie_array)
+ })
+}
 
 
-
-
-fetch(movieAPI)
-.then (resp => resp.json())
-.then (json => renderInfo(json))
-
+function renderInfo(){
+  // mainContainer.innerHTML=""
+  state.movies.forEach(movie => {
+      // console.log("renderInfo",movie)
+      createCard(movie)
+})
+}
+  
 
 
 function deleteChild() { 
@@ -120,32 +137,15 @@ function deleteChild() {
   } 
 } 
 
-
-// function createCard(){
-
-// }
-
-
-function renderInfo(json){
-  json.forEach(element => {
-      // console.log(element)
-      
-      createCard(element)
-
-  })
-
-  
-
 //selecting from dropdown menu
-
-  // const menu = document.getElementById('menu')
-
 
   const liked = document.getElementById('liked')
   const newest = document.getElementById('newest')
   const oldest = document.getElementById('oldest')
   const newcard = document.getElementById('newcard')
+ 
 
+  
   function likeCount(a,b) {
     return b.likes.length - a.likes.length
   }
@@ -161,17 +161,17 @@ function renderInfo(json){
 
   liked.addEventListener("click", function(){
     deleteChild()
-    renderInfo(json.sort(likeCount))
+    renderInfo(state.movies.sort(likeCount))
   })
 
   newest.addEventListener("click", function(){
     deleteChild()
-    renderInfo(json.sort(yearCountNew))
+    renderInfo(state.movies.sort(yearCountNew))
   })
 
   oldest.addEventListener("click", function(){
     deleteChild()
-    renderInfo(json.sort(yearCountOld))
+    renderInfo(state.movies.sort(yearCountOld))
   })
 
   document.querySelector(".formMainContainer").style.display = "none"
@@ -183,60 +183,65 @@ function renderInfo(json){
   })
 
 
-  document.getElementById("button").addEventListener("click", function(){
+  const form = document.getElementById('form')
+
+  form.addEventListener("submit", function(e){
     console.log("yes")
-    // preventDefault()
+    e.preventDefault()
 
+   const formData = new FormData (form)
+
+   const mimage = formData.get('image')
+   console.log("mimage",mimage);
+   const mtitle = formData.get('title')
+   const myear = formData.get('release_year')
+   const msum = formData.get('sum')
+
+   mimage.src = image,
+   mtitle.innerText = title
+   myear.innerText= release_year
+   msum.innerText = sum
+   console.log("image", mimage, mtitle, myear, msum)
+  
+
+    // let img = document.getElementById('pic')
+    img.src = image.value
+    console.log(img.src, "fff")
+
+    // const fcard = document.createElement('front-card')
+    // fcard.appendChild(img)
+    // form.appendChild(fcard)
+
+   const bcard = document.getElementsByClassName('back-card')
     
-    createCard()
-
-    fetch (movieAPI, {
-      method: 'POST',
-      headers: {
+    
+    
+    
+    fetch(movieAPI, {
+        method: 'POST',
+        headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(
-        {image: image.src,
-         title: title.innerText,
-         release_year: year,
-         sum: sum
+        },
+        body: JSON.stringify({
+          image: img.src,
+          title: mtitle.innerText,
+          release_year: myear.innerText,
+          sum: sum.innerText
         })
       })
-    
-    
+
+
+      .then(resp => resp.json())
+        .then(data=>console.log("hhhhh", data))
+     
+  
   })
 
-
-  // menu.addEventListener("change", function(){
-  //   // sort by 
-
-  //   if (menu.value == 1){
-  //     deleteChild()
-  //     renderInfo(json.sort(likeCount))
-  //   }
-
-    
-  //   if (menu.value == 2){
-  //     deleteChild()
-  //     renderInfo(json.sort(yearCountNew))
-
-
-  //   }
-  //   if (menu.value == 3){
-  //     deleteChild()
-  //     renderInfo(json.sort(yearCountOld))
-
-  //   }
-  // })//closing eventListener on menu
-
-
-
-
   
-}  
-  
+
+getMovies()
+
+
+
 })//closing DOM
-
-
-  
