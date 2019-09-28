@@ -1,17 +1,14 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  
-  
+  const parseJson = resp => resp.json()
   const movieAPI = `http://localhost:3000/movies`
   const likeAPI = `http://localhost:3000/likes`
-
-
   const mainContainer=document.querySelector(".mainContainer")
+  const mainform = document.querySelector(".formMainContainer")
 
-
-
-
+ 
+//creates movie card
   function createCard(movie){
 
   const container = document.createElement('div')
@@ -66,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
   likes.innerText = parseInt(`${movie.likes.length}`)
 
   
+  //posting likes
   emoji.addEventListener("click", function (){
       const click = parseInt(likes.innerText)
       likes.innerText = parseInt(click+1)
@@ -76,7 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
       },
-      body: JSON.stringify({number_of_likes: likes.innerText,
+      body: JSON.stringify({
+          number_of_likes: likes.innerText,
           movie_id: movie.id})
       })
   })//closing of likes
@@ -93,40 +92,22 @@ document.addEventListener('DOMContentLoaded', () => {
   h6.addEventListener("click", function(event){
   event.target.parentNode.parentNode.classList.remove('rotate') 
       })
-     
-
-
 }//closing CreateCard()
 
 
-const state = {
-  movies: [],
-  edit: null
-}
 
-
-
-function getMovies(){
+//fetching movies info
   fetch(movieAPI)
-      .then (resp => resp.json())
-      .then (movie_array => {
-        state.movies = movie_array
-        console.log("movie api", movieAPI)
-        console.log("getall", movie_array)
-        renderInfo(movie_array)
- })
-}
+      .then (parseJson)
+      .then (renderInfo)
+    
 
-
-function renderInfo(){
-  // mainContainer.innerHTML=""
-  state.movies.forEach(movie => {
-      // console.log("renderInfo",movie)
-      createCard(movie)
-})
-}
-  
-
+function renderInfo(movies) {
+  console.log("get all", movies)
+  movies.forEach(function(movie){
+    createCard(movie)
+  })
+ 
 
 function deleteChild() { 
   let e = document.querySelector(".mainContainer"); 
@@ -142,10 +123,7 @@ function deleteChild() {
   const liked = document.getElementById('liked')
   const newest = document.getElementById('newest')
   const oldest = document.getElementById('oldest')
-  const newcard = document.getElementById('newcard')
  
-
-  
   function likeCount(a,b) {
     return b.likes.length - a.likes.length
   }
@@ -161,27 +139,29 @@ function deleteChild() {
 
   liked.addEventListener("click", function(){
     deleteChild()
-    renderInfo(state.movies.sort(likeCount))
+    renderInfo(movies.sort(likeCount))
   })
 
   newest.addEventListener("click", function(){
     deleteChild()
-    renderInfo(state.movies.sort(yearCountNew))
+    renderInfo(movies.sort(yearCountNew))
   })
 
   oldest.addEventListener("click", function(){
     deleteChild()
-    renderInfo(state.movies.sort(yearCountOld))
+    renderInfo(movies.sort(yearCountOld))
   })
+}
+  
 
-  document.querySelector(".formMainContainer").style.display = "none"
+
+
+  mainform.style.display = "none"
 
   //add new card option on navbar
   newcard.addEventListener("click", function(){
-    document.querySelector(".formMainContainer").style.display = "block"
-    // createCard()
+    mainform.style.display = "block"
   })
-
 
   const form = document.getElementById('form')
 
@@ -191,31 +171,11 @@ function deleteChild() {
 
    const formData = new FormData (form)
 
-   const mimage = formData.get('image')
-   console.log("mimage",mimage);
+   let mimage = formData.get('image')
    const mtitle = formData.get('title')
    const myear = formData.get('release_year')
    const msum = formData.get('sum')
 
-   mimage.src = image,
-   mtitle.innerText = title
-   myear.innerText= release_year
-   msum.innerText = sum
-   console.log("image", mimage, mtitle, myear, msum)
-  
-
-    // let img = document.getElementById('pic')
-    img.src = image.value
-    console.log(img.src, "fff")
-
-    // const fcard = document.createElement('front-card')
-    // fcard.appendChild(img)
-    // form.appendChild(fcard)
-
-   const bcard = document.getElementsByClassName('back-card')
-    
-    
-    
     
     fetch(movieAPI, {
         method: 'POST',
@@ -224,24 +184,16 @@ function deleteChild() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          image: img.src,
-          title: mtitle.innerText,
-          release_year: myear.innerText,
-          sum: sum.innerText
+          image: mimage,
+          title: mtitle,
+          release_year: myear,
+          sum: msum
         })
-      })
+     }).then(parseJson)
+       .then(createCard)
+       console.log("whatup")
 
-
-      .then(resp => resp.json())
-        .then(data=>console.log("hhhhh", data))
-     
-  
-  })
-
-  
-
-getMovies()
-
-
-
+       e.target.reset()
+       mainform.style.display = "none"
+})//closing createing new card event
 })//closing DOM
