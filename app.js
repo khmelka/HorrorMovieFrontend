@@ -2,8 +2,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   const parseJson = resp => resp.json()
-  const movieAPI = `http://localhost:3000/movies`
-  const likeAPI = `http://localhost:3000/likes`
+  const movieAPI = `https://secret-atoll-35320.herokuapp.com/movies`
+  const likeAPI = `https://secret-atoll-35320.herokuapp.com/likes`
   const mainContainer=document.querySelector(".mainContainer")
   const mainform = document.querySelector(".formMainContainer")
 

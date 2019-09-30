@@ -11,6 +11,29 @@
 
 </head>
 <body>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCj6PM_rT1w8D2xY27Bwk54saYNW5HMv0k",
+    authDomain: "horror-c8aee.firebaseapp.com",
+    databaseURL: "https://horror-c8aee.firebaseio.com",
+    projectId: "horror-c8aee",
+    storageBucket: "",
+    messagingSenderId: "624463724069",
+    appId: "1:624463724069:web:1ce4923223f1b4d45009cc",
+    measurementId: "G-C3HV822DZT"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
     <h1 class="title">HORROR MOVIES</h1>
 
     <ul>
