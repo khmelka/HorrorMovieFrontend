@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const movieAPI = `https://secret-atoll-35320.herokuapp.com/movies`
   const likeAPI = `https://secret-atoll-35320.herokuapp.com/likes`
-  
+
   const mainContainer=document.querySelector(".mainContainer")
   const mainform = document.querySelector(".formMainContainer")
 
@@ -104,7 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
 
 function renderInfo(movies) {
-  console.log("get all", movies)
   movies.forEach(function(movie){
     createCard(movie)
   })
