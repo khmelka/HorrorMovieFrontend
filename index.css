@@ -1,5 +1,3 @@
-
-
 body{
     background-image: url("https://wallpaperplay.com/walls/full/8/a/1/141209.jpg");
     display: content;
@@ -63,11 +61,7 @@ body{
 
   .rotate{
     transform: rotateY(180deg);
-
   }
-/* .card:hover {
-    transform: rotateY(180deg);
-} */
 
 .front-card{
     position: absolute;
@@ -77,7 +71,6 @@ body{
     padding: 10px;
     border-radius: 10px;
     backface-visibility: hidden;
-
 }
   
 .back-card{
@@ -101,7 +94,7 @@ body{
 #pic{
 height: 250px;
 width: 200px;
-/* margin: 0 10px 0 20px; */
+cursor: pointer;
 }
 
 #sum{
@@ -109,12 +102,13 @@ width: 200px;
     color: rgb(243, 54, 54);
     font-size: 18px;
     margin: auto;
+    cursor: pointer;
 }
 
 .em.em---1{
     margin: -10px 0 10px 0;
+    cursor: pointer;
 }
-
 
 #likes{
 position: relative;
@@ -122,34 +116,9 @@ bottom: 5px;
 padding-left: 0.4rem;
 }
 
-
-
-/* navbar */
-
 #audio{
   float: right;
 }
-
-/* .dropdownMenu {
-  width: 120px;
-  border-radius: 3px;
-  overflow: hidden;
-  margin: -50px -10px 30px 10px;
-}
-
-.dropdownMenu select{
-background-color: rgba(230, 14, 14, 0.685);
-color: rgb(8, 1, 1);
-font-size: inherit;
-padding: .5em;
-padding-right: 2.5em; 
-border: 0;
-margin: 0;
-border-radius: 3px;
-text-indent: 0.01px;
-text-overflow: '';
--webkit-appearance: button;
-} */
 
 ul {
   list-style-type: none;
@@ -202,8 +171,6 @@ li.dropdown {
   display: block;
 }
 
-/* form */
-
 input[type=text], select, textarea {
   width: 100%;
   padding: 12px;
@@ -249,4 +216,13 @@ input[type=submit]:hover {
   text-align: center;
   font-size: 1.2rem;
 }
+
+.em.em-x{
+  float: right;
+  background-color: black;
+  margin-top: -4px;
+  cursor: pointer;
+}
+
+
 

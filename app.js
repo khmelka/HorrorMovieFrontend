@@ -1,13 +1,13 @@
-
 document.addEventListener('DOMContentLoaded', () => {
 
   const parseJson = resp => resp.json()
-  const movieAPI = `http://localhost:3000/movies`
-  const likeAPI = `http://localhost:3000/likes`
+
+  const movieAPI = `https://secret-atoll-35320.herokuapp.com/movies`
+  const likeAPI = `https://secret-atoll-35320.herokuapp.com/likes`
+  
   const mainContainer=document.querySelector(".mainContainer")
   const mainform = document.querySelector(".formMainContainer")
 
- 
 //creates movie card
   function createCard(movie){
 
@@ -19,16 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
   card.className = 'card'
   container.appendChild(card)
 
-  //movie_id
-  // card.dataset.movieId = element.id
-
   const frontCardDiv = document.createElement('div')
   frontCardDiv.className = 'front-card'
 
   const backCardDiv = document.createElement('div')
   backCardDiv.className = 'back-card'
   card.append(frontCardDiv, backCardDiv)
-
 
   //image
   const image = document.createElement('img')
@@ -45,14 +41,11 @@ document.addEventListener('DOMContentLoaded', () => {
   year.setAttribute("id", "release_year")
   year.innerText = movie.release_year
 
-
-
   //sum
   const h6 = document.createElement("h6")
   h6.setAttribute("id", "sum")
   backCardDiv.appendChild(h6)
   h6.innerText = movie.sum
-
 
   //emoji
   const emoji = document.createElement('i')
@@ -62,7 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
   likes.setAttribute("id", "likes")
   likes.innerText = parseInt(`${movie.likes.length}`)
 
-  
   //posting likes
   emoji.addEventListener("click", function (){
       const click = parseInt(likes.innerText)
@@ -80,10 +72,21 @@ document.addEventListener('DOMContentLoaded', () => {
       })
   })//closing of likes
 
+//delete event 
+  let del_button = document.createElement('db')
+  del_button.className = "em em-x"
+  del_button.title="delete"
 
- 
-  frontCardDiv.append(image, title, year, emoji, likes)
+  del_button.addEventListener("click", function(){
+  const id = movie.id
+  console.log("delete", id)
+  fetch(`https://secret-atoll-35320.herokuapp.com/movies/${id}`, {
+    method: 'DELETE'
+  })
+  card.style.display="none"
+})
 
+  frontCardDiv.append(image, title, year, emoji, likes, del_button)
 
   image.addEventListener("click", function(event){
   event.target.parentNode.parentNode.classList.toggle('rotate')
@@ -93,8 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
   event.target.parentNode.parentNode.classList.remove('rotate') 
       })
 }//closing CreateCard()
-
-
 
 //fetching movies info
   fetch(movieAPI)
@@ -152,9 +153,6 @@ function deleteChild() {
     renderInfo(movies.sort(yearCountOld))
   })
 }
-  
-
-
 
   mainform.style.display = "none"
 
@@ -166,7 +164,7 @@ function deleteChild() {
   const form = document.getElementById('form')
 
   form.addEventListener("submit", function(e){
-    console.log("yes")
+    console.log("new movie created")
     e.preventDefault()
 
    const formData = new FormData (form)
@@ -191,9 +189,10 @@ function deleteChild() {
         })
      }).then(parseJson)
        .then(createCard)
-       console.log("whatup")
 
        e.target.reset()
        mainform.style.display = "none"
-})//closing createing new card event
+
+  })//closing createing new card event
+
 })//closing DOM
