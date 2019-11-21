@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //emoji
   const emoji = document.createElement('i')
-  emoji.className = "em em---1"
+  emoji.className = "fas fa-thumbs-up"
 
   const likes = document.createElement('span')
   likes.setAttribute("id", "likes")
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //delete event 
   let del_button = document.createElement('db')
-  del_button.className = "em em-x"
+  del_button.className = "far fa-trash-alt"
   del_button.title="delete"
 
   del_button.addEventListener("click", function(){
