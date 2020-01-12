@@ -98,12 +98,24 @@ document.addEventListener('DOMContentLoaded', () => {
 }//closing CreateCard()
 
 //fetching movies info
+
+const spinner = document.getElementById("spinner");
+
+function showSpinner() {
+  spinner.className = "show";
+  setTimeout(() => {
+    spinner.className = spinner.className.replace("show", "");
+  }, 5000);
+}
+
+
   fetch(movieAPI)
       .then (parseJson)
       .then (renderInfo)
     
 
 function renderInfo(movies) {
+  showSpinner()
   movies.forEach(function(movie){
     createCard(movie)
   })
