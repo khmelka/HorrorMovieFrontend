@@ -1,3 +1,5 @@
+## HorrorMovieFrontend
+
 HorrorMovie app lets you keep track of your favorite horror movies, add or delete movie cards.
 <br>
 
